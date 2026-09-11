@@ -1,0 +1,14 @@
+__pycache__/
+.DS_Store
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+.vite/
+data/research.json
+data/research-apply.json
+.server.lock
+workspaces/
+release/

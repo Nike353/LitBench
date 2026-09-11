@@ -1,0 +1,12 @@
+node_modules
+dist
+coverage
+lib
+data/graph.js
+data/graph.json
+data/imports/*.json
+papers/*.md
+test-results
+playwright-report
+
+tests/fixtures/library/data/graph.js

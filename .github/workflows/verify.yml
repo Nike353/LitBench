@@ -1,0 +1,26 @@
+name: Verify
+on: [push, pull_request]
+jobs:
+  verify:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm run verify
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: python3 scripts/package_release.py --runtime --output release/litbench-runtime.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: litbench-${{ matrix.os }}
+          path: release/*.zip

@@ -1,0 +1,1378 @@
+{
+  "schema_version": 1,
+  "batch_id": "humanoid-loco-manipulation-2026-01-01_2026-07-23",
+  "generated_at": "2026-09-10T16:29:51.537366Z",
+  "date_range": {
+    "from": "2026-01-01",
+    "through": "2026-07-23"
+  },
+  "query": {
+    "endpoint": "https://export.arxiv.org/api/query",
+    "search_queries": [
+      "cat:cs.RO AND (all:\"loco-manipulation\" OR all:\"loco manipulation\" OR all:\"tele-loco-manipulation\" OR all:\"loco-manipulation\") AND submittedDate:[202601010000 TO 202607232359]",
+      "cat:cs.RO AND (all:humanoid AND (all:manipulation OR all:teleoperation OR all:\"object interaction\" OR all:\"physical interaction\")) AND submittedDate:[202601010000 TO 202607232359]",
+      "cat:cs.RO AND (all:humanoid AND (all:\"whole-body control\" OR all:\"whole body control\" OR all:\"whole-body motion\" OR all:\"whole body motion\" OR all:\"whole-body tracking\")) AND submittedDate:[202601010000 TO 202607232359]",
+      "cat:cs.RO AND ((all:humanoid OR all:bipedal) AND (all:locomotion OR all:walking OR all:\"mobile manipulation\") AND (all:control OR all:learning)) AND submittedDate:[202601010000 TO 202607232359]"
+    ],
+    "sort_by": "submittedDate",
+    "sort_order": "descending"
+  },
+  "sources": [
+    {
+      "query_id": "direct-loco-manipulation",
+      "snapshot_file": "tests/fixtures/library/data/imports/sources/direct-loco-manipulation-2026-01-01_2026-07-23.atom.xml",
+      "sha256": "c27ec09816df90ecd743d1cb0e132b58c44bed860461dbc6138548b13b84491a",
+      "result_count": 20
+    },
+    {
+      "query_id": "humanoid-manipulation",
+      "snapshot_file": "tests/fixtures/library/data/imports/sources/humanoid-manipulation-2026-01-01_2026-07-23.atom.xml",
+      "sha256": "06149bd98e88cff19e1cecc370126bcb89376d5c6f347da7ab852b940d12b68f",
+      "result_count": 20
+    },
+    {
+      "query_id": "humanoid-whole-body",
+      "snapshot_file": "tests/fixtures/library/data/imports/sources/humanoid-whole-body-2026-01-01_2026-07-23.atom.xml",
+      "sha256": "516d8922ff2825404142cf8f132ec5942f1691380e233055bc18501547081164",
+      "result_count": 20
+    },
+    {
+      "query_id": "humanoid-locomotion-control",
+      "snapshot_file": "tests/fixtures/library/data/imports/sources/humanoid-locomotion-control-2026-01-01_2026-07-23.atom.xml",
+      "sha256": "0ab79dd25642717a73f59c916896330d1e1f93ab231a3317db00d89551807356",
+      "result_count": 20
+    }
+  ],
+  "relevance_policy": {
+    "description": "The selected local agent, not the retrieval tool, determines whether a candidate is genuinely relevant to humanoid loco-manipulation before proposing graph changes.",
+    "evaluated_by": "selected-local-agent",
+    "hard_requirements": [
+      "Humanoid or bipedal robotic embodiment is central.",
+      "The contribution concerns loco-manipulation, whole-body control or interaction, locomotion while manipulating, humanoid mobile manipulation, or embodied humanoid control.",
+      "Incidental benchmark mentions or non-humanoid mobile-agent work must be rejected."
+    ]
+  },
+  "requested_count": 50,
+  "retrieved_count": 50,
+  "agent_qualified_count": null,
+  "records": [
+    {
+      "arxiv_id": "2607.10315",
+      "canonical_url": "https://arxiv.org/abs/2607.10315",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-15",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-20T00:00:00Z",
+      "updated_at": "2026-07-20T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10300",
+      "canonical_url": "https://arxiv.org/abs/2607.10300",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-0",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-20T00:00:00Z",
+      "updated_at": "2026-07-20T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10215",
+      "canonical_url": "https://arxiv.org/abs/2607.10215",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-15",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-20T00:00:00Z",
+      "updated_at": "2026-07-20T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10200",
+      "canonical_url": "https://arxiv.org/abs/2607.10200",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-0",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-20T00:00:00Z",
+      "updated_at": "2026-07-20T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10115",
+      "canonical_url": "https://arxiv.org/abs/2607.10115",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-15",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-20T00:00:00Z",
+      "updated_at": "2026-07-20T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10100",
+      "canonical_url": "https://arxiv.org/abs/2607.10100",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-0",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-20T00:00:00Z",
+      "updated_at": "2026-07-20T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10015",
+      "canonical_url": "https://arxiv.org/abs/2607.10015",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-15",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-20T00:00:00Z",
+      "updated_at": "2026-07-20T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10000",
+      "canonical_url": "https://arxiv.org/abs/2607.10000",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-0",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-20T00:00:00Z",
+      "updated_at": "2026-07-20T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10316",
+      "canonical_url": "https://arxiv.org/abs/2607.10316",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-16",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-19T00:00:00Z",
+      "updated_at": "2026-07-19T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10301",
+      "canonical_url": "https://arxiv.org/abs/2607.10301",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-1",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-19T00:00:00Z",
+      "updated_at": "2026-07-19T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10216",
+      "canonical_url": "https://arxiv.org/abs/2607.10216",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-16",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-19T00:00:00Z",
+      "updated_at": "2026-07-19T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10201",
+      "canonical_url": "https://arxiv.org/abs/2607.10201",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-1",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-19T00:00:00Z",
+      "updated_at": "2026-07-19T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10116",
+      "canonical_url": "https://arxiv.org/abs/2607.10116",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-16",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-19T00:00:00Z",
+      "updated_at": "2026-07-19T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10101",
+      "canonical_url": "https://arxiv.org/abs/2607.10101",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-1",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-19T00:00:00Z",
+      "updated_at": "2026-07-19T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10016",
+      "canonical_url": "https://arxiv.org/abs/2607.10016",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-16",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-19T00:00:00Z",
+      "updated_at": "2026-07-19T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10001",
+      "canonical_url": "https://arxiv.org/abs/2607.10001",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-1",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-19T00:00:00Z",
+      "updated_at": "2026-07-19T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10317",
+      "canonical_url": "https://arxiv.org/abs/2607.10317",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-17",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-18T00:00:00Z",
+      "updated_at": "2026-07-18T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10302",
+      "canonical_url": "https://arxiv.org/abs/2607.10302",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-2",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-18T00:00:00Z",
+      "updated_at": "2026-07-18T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10217",
+      "canonical_url": "https://arxiv.org/abs/2607.10217",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-17",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-18T00:00:00Z",
+      "updated_at": "2026-07-18T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10202",
+      "canonical_url": "https://arxiv.org/abs/2607.10202",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-2",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-18T00:00:00Z",
+      "updated_at": "2026-07-18T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10117",
+      "canonical_url": "https://arxiv.org/abs/2607.10117",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-17",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-18T00:00:00Z",
+      "updated_at": "2026-07-18T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10102",
+      "canonical_url": "https://arxiv.org/abs/2607.10102",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-2",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-18T00:00:00Z",
+      "updated_at": "2026-07-18T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10017",
+      "canonical_url": "https://arxiv.org/abs/2607.10017",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-17",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-18T00:00:00Z",
+      "updated_at": "2026-07-18T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10002",
+      "canonical_url": "https://arxiv.org/abs/2607.10002",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-2",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-18T00:00:00Z",
+      "updated_at": "2026-07-18T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10318",
+      "canonical_url": "https://arxiv.org/abs/2607.10318",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-18",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10303",
+      "canonical_url": "https://arxiv.org/abs/2607.10303",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-3",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10218",
+      "canonical_url": "https://arxiv.org/abs/2607.10218",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-18",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10203",
+      "canonical_url": "https://arxiv.org/abs/2607.10203",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-3",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10118",
+      "canonical_url": "https://arxiv.org/abs/2607.10118",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-18",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10103",
+      "canonical_url": "https://arxiv.org/abs/2607.10103",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-3",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10018",
+      "canonical_url": "https://arxiv.org/abs/2607.10018",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-18",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10003",
+      "canonical_url": "https://arxiv.org/abs/2607.10003",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-3",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-17T00:00:00Z",
+      "updated_at": "2026-07-17T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10319",
+      "canonical_url": "https://arxiv.org/abs/2607.10319",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-19",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-16T00:00:00Z",
+      "updated_at": "2026-07-16T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10304",
+      "canonical_url": "https://arxiv.org/abs/2607.10304",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-4",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-16T00:00:00Z",
+      "updated_at": "2026-07-16T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10219",
+      "canonical_url": "https://arxiv.org/abs/2607.10219",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-19",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-16T00:00:00Z",
+      "updated_at": "2026-07-16T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10204",
+      "canonical_url": "https://arxiv.org/abs/2607.10204",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-4",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-16T00:00:00Z",
+      "updated_at": "2026-07-16T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10119",
+      "canonical_url": "https://arxiv.org/abs/2607.10119",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-19",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-16T00:00:00Z",
+      "updated_at": "2026-07-16T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10104",
+      "canonical_url": "https://arxiv.org/abs/2607.10104",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-4",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-16T00:00:00Z",
+      "updated_at": "2026-07-16T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10019",
+      "canonical_url": "https://arxiv.org/abs/2607.10019",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-19",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-16T00:00:00Z",
+      "updated_at": "2026-07-16T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10004",
+      "canonical_url": "https://arxiv.org/abs/2607.10004",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-4",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-16T00:00:00Z",
+      "updated_at": "2026-07-16T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10305",
+      "canonical_url": "https://arxiv.org/abs/2607.10305",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-5",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-15T00:00:00Z",
+      "updated_at": "2026-07-15T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10205",
+      "canonical_url": "https://arxiv.org/abs/2607.10205",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-5",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-15T00:00:00Z",
+      "updated_at": "2026-07-15T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10105",
+      "canonical_url": "https://arxiv.org/abs/2607.10105",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-5",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-15T00:00:00Z",
+      "updated_at": "2026-07-15T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10005",
+      "canonical_url": "https://arxiv.org/abs/2607.10005",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-5",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-15T00:00:00Z",
+      "updated_at": "2026-07-15T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10306",
+      "canonical_url": "https://arxiv.org/abs/2607.10306",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-6",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-14T00:00:00Z",
+      "updated_at": "2026-07-14T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10206",
+      "canonical_url": "https://arxiv.org/abs/2607.10206",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-6",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-14T00:00:00Z",
+      "updated_at": "2026-07-14T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10106",
+      "canonical_url": "https://arxiv.org/abs/2607.10106",
+      "title": "Synthetic humanoid locomotion manipulation fixture 1-6",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-14T00:00:00Z",
+      "updated_at": "2026-07-14T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-manipulation",
+      "query_terms": [
+        "humanoid",
+        "manipulation",
+        "teleoperation",
+        "object interaction",
+        "physical interaction"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-manipulation"],
+        "matched_terms": ["humanoid", "manipulation"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10006",
+      "canonical_url": "https://arxiv.org/abs/2607.10006",
+      "title": "Synthetic humanoid locomotion manipulation fixture 0-6",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-14T00:00:00Z",
+      "updated_at": "2026-07-14T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "direct-loco-manipulation",
+      "query_terms": ["loco-manipulation", "loco manipulation", "tele-loco-manipulation"],
+      "retrieval_match": {
+        "query_ids": ["direct-loco-manipulation"],
+        "matched_terms": []
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10307",
+      "canonical_url": "https://arxiv.org/abs/2607.10307",
+      "title": "Synthetic humanoid locomotion manipulation fixture 3-7",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-locomotion-control",
+      "query_terms": [
+        "humanoid",
+        "bipedal",
+        "locomotion",
+        "walking",
+        "mobile manipulation",
+        "control",
+        "learning"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-locomotion-control"],
+        "matched_terms": ["control", "humanoid", "locomotion"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    },
+    {
+      "arxiv_id": "2607.10207",
+      "canonical_url": "https://arxiv.org/abs/2607.10207",
+      "title": "Synthetic humanoid locomotion manipulation fixture 2-7",
+      "authors": ["Fixture Author"],
+      "abstract": "Synthetic humanoid whole-body control locomotion manipulation record for parser tests. Not an actual paper.",
+      "submitted_at": "2026-07-13T00:00:00Z",
+      "updated_at": "2026-07-13T00:00:00Z",
+      "categories": ["cs.RO"],
+      "primary_category": "cs.RO",
+      "query_id": "humanoid-whole-body",
+      "query_terms": [
+        "humanoid",
+        "whole-body control",
+        "whole body control",
+        "whole-body motion",
+        "whole body motion",
+        "whole-body tracking"
+      ],
+      "retrieval_match": {
+        "query_ids": ["humanoid-whole-body"],
+        "matched_terms": ["humanoid", "whole-body control"]
+      },
+      "retrieved_at": "2026-09-10T16:29:51.537366Z",
+      "queue_status": "queued",
+      "attempts": 0,
+      "last_error": null
+    }
+  ],
+  "retrieval_exclusions": []
+}

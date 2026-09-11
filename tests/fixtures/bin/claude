@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+printf '%s\n' '{"type":"system","subtype":"init"}'
+sleep 30

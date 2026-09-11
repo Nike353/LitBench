@@ -1,0 +1,153 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import canonicalGraph from '../../tests/fixtures/library/data/graph.json';
+import { migrateAndValidateGraph, NODE_TYPES, STATUSES } from '../domain/schema';
+import { useWorkspaceStore } from './workspaceStore';
+
+const graph = migrateAndValidateGraph(canonicalGraph).graph;
+
+function resetStore() {
+  useWorkspaceStore.setState({
+    graph: structuredClone(graph),
+    baseRevision: graph.meta.revision,
+    mode: 'api',
+    loading: false,
+    dirty: false,
+    error: null,
+    migratedFrom: null,
+    draftAvailable: false,
+    selection: null,
+    activeTab: 'library',
+    graphView: 'universe',
+    filters: {
+      query: '',
+      nodeTypes: new Set(NODE_TYPES),
+      statuses: new Set(STATUSES),
+      relations: new Set(graph.edges.map((edge) => edge.relation)),
+      clusterId: null,
+      showRejected: false,
+    },
+    toasts: [],
+  });
+}
+
+describe('workspace store', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    resetStore();
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.useRealTimers();
+  });
+
+  it('marks content edits as user-owned and persists a draft', () => {
+    const proposed = graph.nodes.find((node) => node.origin === 'claude')!;
+
+    useWorkspaceStore.getState().updateNode(proposed.id, {
+      label: 'Researcher-edited label',
+    });
+
+    const state = useWorkspaceStore.getState();
+    expect(state.dirty).toBe(true);
+    expect(state.graph?.nodes.find((node) => node.id === proposed.id)).toMatchObject({
+      label: 'Researcher-edited label',
+      origin: 'user',
+    });
+    expect(localStorage.getItem('litbench:v2:draft')).not.toBeNull();
+  });
+
+  it('persists layout positions without transferring content ownership', () => {
+    const proposed = graph.nodes.find((node) => node.origin === 'claude')!;
+
+    useWorkspaceStore.getState().updateNodePosition(proposed.id, { x: 12, y: -4, z: 30 });
+
+    expect(
+      useWorkspaceStore.getState().graph?.nodes.find((node) => node.id === proposed.id),
+    ).toMatchObject({
+      origin: 'claude',
+      position: { x: 12, y: -4, z: 30 },
+    });
+  });
+
+  it('makes review decisions user-owned for nodes and edges', () => {
+    const proposedNode = graph.nodes.find((node) => node.status === 'proposed')!;
+    const proposedEdge = graph.edges.find((edge) => edge.status === 'proposed')!;
+    const store = useWorkspaceStore.getState();
+
+    store.setStatus('node', proposedNode.id, 'accepted');
+    useWorkspaceStore.getState().setStatus('edge', proposedEdge.id, 'uncertain');
+
+    const updated = useWorkspaceStore.getState().graph!;
+    expect(updated.nodes.find((node) => node.id === proposedNode.id)).toMatchObject({
+      status: 'accepted',
+      origin: 'user',
+    });
+    expect(updated.edges.find((edge) => edge.id === proposedEdge.id)).toMatchObject({
+      status: 'uncertain',
+      origin: 'user',
+    });
+  });
+
+  it('resets every graph visibility filter together', () => {
+    useWorkspaceStore.setState(() => ({
+      filters: {
+        query: 'narrow query',
+        nodeTypes: new Set(),
+        statuses: new Set(),
+        relations: new Set(),
+        clusterId: graph.nodes.find((node) => node.type === 'cluster')!.id,
+        showRejected: true,
+      },
+    }));
+
+    useWorkspaceStore.getState().resetFilters();
+
+    const filters = useWorkspaceStore.getState().filters;
+    expect(filters.query).toBe('');
+    expect(filters.nodeTypes).toEqual(new Set(NODE_TYPES));
+    expect(filters.statuses).toEqual(new Set(STATUSES));
+    expect(filters.relations).toEqual(new Set(graph.edges.map((edge) => edge.relation)));
+    expect(filters.clusterId).toBeNull();
+    expect(filters.showRejected).toBe(false);
+  });
+
+  it('switches graph views without changing graph data or filters', () => {
+    const before = useWorkspaceStore.getState();
+
+    before.setGraphView('lineages');
+
+    const after = useWorkspaceStore.getState();
+    expect(after.graphView).toBe('lineages');
+    expect(after.graph).toBe(before.graph);
+    expect(after.filters).toBe(before.filters);
+  });
+
+  it('saves the next revision and clears dirty draft state', async () => {
+    const proposed = graph.nodes.find((node) => node.status === 'proposed')!;
+    useWorkspaceStore.getState().setStatus('node', proposed.id, 'accepted');
+    const nextRevision = graph.meta.revision + 1;
+    const fetchMock = vi.fn(async (_url: string, init?: RequestInit) => {
+      const body = JSON.parse(String(init?.body)) as {
+        base_revision: number;
+        graph: typeof graph;
+      };
+      expect(body.base_revision).toBe(graph.meta.revision);
+      expect(body.graph.meta.revision).toBe(nextRevision);
+      return new Response(JSON.stringify(body.graph), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const mode = await useWorkspaceStore.getState().save();
+
+    const state = useWorkspaceStore.getState();
+    expect(mode).toBe('api');
+    expect(state.baseRevision).toBe(nextRevision);
+    expect(state.graph?.meta.revision).toBe(nextRevision);
+    expect(state.dirty).toBe(false);
+    expect(localStorage.getItem('litbench:v2:draft')).toBeNull();
+  });
+});
