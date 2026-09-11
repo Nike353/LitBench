@@ -10,7 +10,7 @@ APP = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(APP / "tools"))
 from build_data_js import render_mirror  # noqa: E402
 
-ROOT_FILES = ["README.md", "LICENSE", "CONTRIBUTING.md", "SECURITY.md", "CHANGELOG.md",
+ROOT_FILES = ["start.sh", "pyproject.toml", "uv.lock", "README.md", "LICENSE", "CONTRIBUTING.md", "SECURITY.md", "CHANGELOG.md",
               "package.json", "package-lock.json", "index.html", "vite.config.ts",
               "tsconfig.json", "tsconfig.app.json", "tsconfig.node.json", "eslint.config.js",
               "playwright.config.ts", ".gitignore", ".prettierignore", ".prettierrc.json"]

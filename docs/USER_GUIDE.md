@@ -1,6 +1,6 @@
 # Your personal research workspace
 
-Start with `python3 scripts/start.py`. The launcher keeps your library separate
+Start with `sh start.sh`. The launcher keeps your library separate
 from the application. Use `--workspace /path/to/library` to open another library;
 an empty directory becomes a new universe. Open the localhost URL printed by
 the server. Browsing and manual editing need no agent. AI features require a
@@ -72,7 +72,7 @@ For a complete backup, stop the server and copy the entire workspace, including
 
 ## Troubleshooting
 
-- Run `python3 scripts/start.py --doctor` to inspect prerequisites.
+- Run `sh start.sh --doctor` to inspect prerequisites.
 - If an agent is missing, install and sign in to its CLI, then restart the server.
   Set `LITBENCH_CODEX` or `LITBENCH_CLAUDE` for a custom executable path.
 - A provider usage limit or authentication failure comes from that CLI's account.

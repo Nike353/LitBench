@@ -1,8 +1,11 @@
 # Contributing
 
-Use Node.js 20.19+ and Python 3.10+ on macOS or Linux.
+Run `sh start.sh --prepare-only` on macOS or Linux to install the managed tools.
+For development commands below, use Node.js 22+ on PATH and the uv environment.
 
 ```sh
+uv sync --locked
+export PATH="$PWD/.venv/bin:$PATH"
 npm ci
 npm run verify
 npx playwright install chromium

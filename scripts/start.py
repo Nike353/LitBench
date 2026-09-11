@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Start LitBench on macOS or Linux, with a separate personal workspace."""
+"""Prepare and start LitBench. Normally invoked by ./start.sh through uv."""
 import argparse
+import hashlib
 import os
-import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 APP = Path(__file__).resolve().parent.parent
+NODE_VERSION = "22.23.2"
 
 
 def default_workspace():
@@ -16,36 +18,76 @@ def default_workspace():
     return base / "LitBench/default"
 
 
+def source_digest():
+    paths = [APP / name for name in ("package.json", "package-lock.json", "index.html", "vite.config.ts", "scripts/copy-static.mjs")]
+    paths += sorted((APP / "src").rglob("*"))
+    digest = hashlib.sha256()
+    for path in paths:
+        if path.is_file():
+            digest.update(str(path.relative_to(APP)).encode())
+            digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
+def prepare_frontend(force=False):
+    cache = APP / ".litbench"
+    cache.mkdir(exist_ok=True)
+    # Serialize setup so simultaneous starts cannot damage shared dependencies.
+    import fcntl
+    with (cache / "setup.lock").open("w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        built = (APP / "dist/index.html").is_file()
+        if not (APP / "src").is_dir():
+            if built and not force:
+                return
+            raise SystemExit("This runtime archive has no frontend source. Download the source to rebuild it.")
+        digest = source_digest()
+        stamp = cache / "frontend.sha256"
+        if built and not force and stamp.exists() and stamp.read_text() == digest:
+            return
+        node_home = cache / f"node-{NODE_VERSION}"
+        if not (node_home / "bin/npm").exists():
+            print("Setting up the frontend build tools (one time)…", flush=True)
+            with tempfile.TemporaryDirectory(dir=cache, prefix="node-setup-") as temporary:
+                target = Path(temporary) / "node"
+                subprocess.run([sys.executable, "-m", "nodeenv", "--prebuilt",
+                                f"--node={NODE_VERSION}", str(target)], check=True)
+                target.rename(node_home)
+        env = dict(os.environ)
+        env["PATH"] = str(node_home / "bin") + os.pathsep + str(Path(sys.executable).parent) + os.pathsep + env.get("PATH", "")
+        print("Building LitBench. First launch may take a few minutes…", flush=True)
+        subprocess.run([str(node_home / "bin/npm"), "ci", "--no-audit", "--no-fund"], cwd=APP, env=env, check=True)
+        subprocess.run([str(node_home / "bin/npm"), "run", "build"], cwd=APP, env=env, check=True)
+        stamp.write_text(digest)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace", type=Path, default=default_workspace())
-    parser.add_argument("--port", type=int, default=8000)
-    parser.add_argument("--build", action="store_true", help="Rebuild frontend after updating source")
-    parser.add_argument("--doctor", action="store_true", help="Check prerequisites without starting")
+    parser.add_argument("--port", type=int, help="Use a specific port (otherwise choose an available port starting at 8000)")
+    parser.add_argument("--build", action="store_true", help="Force a frontend rebuild")
+    parser.add_argument("--doctor", action="store_true", help="Show setup information without starting")
+    parser.add_argument("--prepare-only", action="store_true", help="Set up dependencies and frontend without starting")
     args = parser.parse_args()
-    if sys.version_info < (3, 10):
-        raise SystemExit("LitBench needs Python 3.10 or newer. Install a current Python and run this command again.")
-    print(f"Python {sys.version.split()[0]} · {sys.platform}")
-    print(f"Workspace: {args.workspace.expanduser().resolve()}")
-    print(f"Frontend: {'ready' if (APP / 'dist/index.html').exists() else 'needs build'}")
-    for name in ("codex", "claude"):
-        configured = os.environ.get(f"LITBENCH_{name.upper()}")
-        print(f"{name}: {configured or shutil.which(name) or 'not found (optional for browsing)'}")
+    print(f"LitBench · Python {sys.version.split()[0]}", flush=True)
+    print(f"Library: {args.workspace.expanduser().resolve()}", flush=True)
     if args.doctor:
-        print(f"Node: {shutil.which('node') or 'not found'}; npm: {shutil.which('npm') or 'not found'}")
-        print("Sign in once with codex or claude before using AI features. No separate LitBench API key is required.")
+        import shutil
+        for name in ("codex", "claude"):
+            print(f"{name}: {os.environ.get(f'LITBENCH_{name.upper()}') or shutil.which(name) or 'not installed (optional)'}")
+        print("Run ./start.sh to set up and launch. AI features need one signed-in agent CLI.")
         return
-    if args.build or not (APP / "dist/index.html").exists():
-        if not shutil.which("npm") or not shutil.which("node"):
-            raise SystemExit("Source setup needs Node.js 20.19+ and npm. Install Node, or use the prebuilt runtime archive (Python + agent only).")
-        version = subprocess.check_output(["node", "--version"], text=True).strip().lstrip("v")
-        major, minor = map(int, version.split(".")[:2])
-        if major < 20 or (major == 20 and minor < 19):
-            raise SystemExit("Install Node.js 20.19 or newer to build LitBench.")
-        subprocess.run(["npm", "ci", "--no-audit", "--no-fund"], cwd=APP, check=True)
-        subprocess.run(["npm", "run", "build"], cwd=APP, check=True)
-    os.execv(sys.executable, [sys.executable, str(APP / "tools/serve.py"),
-                            "--workspace", str(args.workspace), "--port", str(args.port)])
+    try:
+        prepare_frontend(args.build)
+    except subprocess.CalledProcessError as error:
+        raise SystemExit(f"Setup could not finish (exit {error.returncode}). Check your connection and retry ./start.sh.") from error
+    if args.prepare_only:
+        print("LitBench is ready.")
+        return
+    command = [sys.executable, "-u", str(APP / "tools/serve.py"), "--workspace", str(args.workspace)]
+    if args.port is not None:
+        command += ["--port", str(args.port)]
+    os.execv(sys.executable, command)
 
 
 if __name__ == "__main__":

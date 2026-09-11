@@ -1,151 +1,139 @@
 # LitBench
 
-A local research workspace for building your own paper universe. Explore papers,
-methods, and evidence in a 2D lineage map or 3D graph; ask questions through Codex
-or Claude Code; save learnings; and compare papers side by side.
+**Read papers. Connect ideas. Build your own research map.**
 
-## Start your own library
+LitBench turns a paper library into an interactive workspace. See how papers
+relate, keep the ideas you want to remember, and ask questions grounded in your
+notes—all from a browser on your own computer.
 
-On macOS or Linux, install Python 3.10+ and a signed-in Codex or Claude Code CLI.
-Source builds also require Node.js 20.19+ and npm. A prebuilt runtime archive
-includes the frontend, so Node.js is not needed to run it.
+![Papers grouped into connected research fields in LitBench's 3D universe](docs/images/universe.png)
+
+## Get started
+
+Download this repository using **Code → Download ZIP** and unzip it. Open a
+terminal in the extracted folder and run:
+
+```sh
+sh start.sh
+```
+
+That's the setup command and the launch command. It installs uv if needed, lets
+uv manage Python and its dependencies, sets up the frontend build tools, and
+starts LitBench. You do not need to install Python, Node.js, or npm yourself.
+First launch needs internet access and may take a few minutes; later launches
+reuse the installed tools and built app. Supported on **macOS and Linux**.
+
+When it's ready, the terminal prints something like:
+
+```text
+LitBench serving on http://127.0.0.1:8000  (Ctrl-C to stop)
+```
+
+**Open the address printed in your terminal.** It works on your computer while
+LitBench is running; it is not a hosted demo website. If port 8000 is busy, the
+launcher chooses another available port. Keep the terminal open while using the
+app, and press `Ctrl+C` when you're done.
+
+<details>
+<summary>Prefer Git?</summary>
 
 ```sh
 git clone https://github.com/Nike353/LitBench.git
 cd LitBench
-python3 scripts/start.py
+sh start.sh
 ```
 
-For source distributions, the launcher installs locked frontend dependencies and
-builds the UI on first run. Open [LitBench](http://127.0.0.1:8000) in your browser.
-Use **Add paper** to import your first paper and review its proposed connections.
-The repository starts empty: it contains no personal papers or saved conversations.
-You can browse and manually edit without an agent.
+To update later, stop the server, run `git pull --ff-only`, then run `sh start.sh`
+again. Changed frontend source is rebuilt automatically.
 
-Your library is separate from the application. The default location is
-`~/Library/Application Support/LitBench/default` on macOS and
-`~/.local/share/LitBench/default` on Linux (honoring `XDG_DATA_HOME`).
+</details>
+
+### Add your first paper
+
+Your library starts empty. Click **Add paper**, paste an arXiv URL, and choose
+an agent. LitBench reads the paper and proposes a place for it in your graph,
+along with methods and relationships. Review the proposals, accept what belongs,
+and **Save changes**.
+
+For importing papers and asking AI questions, install and sign in to **one** of
+[Codex](https://developers.openai.com/codex/quickstart) or
+[Claude Code](https://code.claude.com/docs/en/quickstart), then restart LitBench.
+These features use that account's provider and usage limits. Browsing and manual
+editing work without an agent.
+
+## See the connections
+
+Switch between the **3D Universe** for exploring research fields and
+**2D Lineages** for following how papers build on one another. Search for a paper,
+focus a field, or reveal the methods and concepts connecting the work.
+
+![A chronological paper map with research lanes and connections](docs/images/lineages.png)
+
+## Make the library yours
+
+Select a paper to read its summary, findings, original notes, and connections.
+Add your own notes, organize papers into clusters, or create a relationship with
+an explanation and supporting evidence.
+
+![The paper inspector with notes, research actions, and editable fields](docs/images/paper.png)
+
+## Ask, compare, and keep what you learn
+
+| What you want to do                | Where to start                                                     |
+| ---------------------------------- | ------------------------------------------------------------------ |
+| Understand a paper                 | Select it and choose **Discuss this paper**.                       |
+| Compare approaches                 | Open **Compare**, choose 2–20 papers, and pick your columns.       |
+| Ask a specific comparison question | Add a custom column, such as “What changes at deployment?”         |
+| Check an answer                    | Expand the cited sources or the evidence attached to a table cell. |
+| Remember an insight                | Use **Save answer as note** to add it to a research record.        |
+| Reorganize the graph               | Ask for a change, inspect the proposal, then accept or reject it.  |
+| Take your work elsewhere           | Export comparisons as CSV and conversations as Markdown or JSON.   |
+
+Try: “What changes between these two methods?” or “Explain this paper's main
+limitation and propose a short note.” Conversations are saved locally so you can
+come back later. Answers use the notes available in your library; missing details
+should be identified rather than guessed. Review the evidence and proposed edits.
+
+_The screenshots above use a small synthetic demo library. Your own installation
+starts empty, and no personal research library is included in this repository._
+
+## Where your work lives
+
+The application and your library are stored separately. By default, your papers,
+notes, graph, and conversations live in:
+
+- **macOS:** `~/Library/Application Support/LitBench/default`
+- **Linux:** `~/.local/share/LitBench/default` (or under `XDG_DATA_HOME`)
+
+To use a different library:
 
 ```sh
-python3 scripts/start.py --workspace /path/to/my-library --port 8000
-python3 scripts/start.py --doctor
+sh start.sh --workspace /path/to/my-library
 ```
 
-To open an existing repository's library in place:
+To back up your work, stop LitBench and copy that entire library folder.
+Application updates do not replace it. AI features send selected paper context
+to your configured provider; see [data handling](SECURITY.md) for details.
 
-```sh
-python3 scripts/start.py --workspace .
-```
+## Need a hand?
 
-The server binds to localhost. Your files remain local; AI operations send
-selected context through your agent's configured provider and use its account
-limits. LitBench needs no separate API key or installed agent skill.
+- **Setup stopped?** Check your connection and run `sh start.sh` again. Downloads
+  and environments are reused. Setup does not require sudo or edit shell profiles.
+- **Agent not found?** Run `sh start.sh --doctor`, sign in to your agent CLI, and
+  restart. Custom executable paths and more help are in the [user guide](docs/USER_GUIDE.md).
+- **Want a specific port?** Use `sh start.sh --port 8100`.
+- **No 3D support?** Use the graph fallback or the 2D lineage view.
+- **Using Windows?** Native Windows is not supported yet; the launcher targets
+  macOS and Linux.
 
-## Research workflow
+## Contribute
 
-- **Discuss:** choose papers, a cluster, or a method; ask questions with citations.
-- **Save learnings:** append an answer to personal notes while preserving original
-  source notes.
-- **Change your graph:** ask an agent to rename, move, create, or connect records;
-  inspect before/after proposals and accept the bundle.
-- **Compare:** choose 2–20 papers, preset or custom columns, and inspect evidence
-  for each cell. Export CSV, Markdown, or JSON.
-- **Edit manually:** create clusters, methods, and connections from Library or an
-  inspector; save the draft when ready.
-- **Return later:** conversations persist locally, survive browser refresh, and
-  support archive, restore, export, deletion, and cancellation.
+LitBench uses React and TypeScript for the interface and Python for its local
+server. Python setup is locked with uv; frontend dependencies are locked with npm.
+The launcher installs a private Node runtime using the uv-managed `nodeenv` tool.
 
-See [the user guide](docs/USER_GUIDE.md) for session limits, backups, and examples,
-[clustering and architecture decisions](docs/RESEARCH_DESIGN.md), and
-[data handling](SECURITY.md). Native Windows is not supported by the current
-process and file-lock implementation.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development and tests, the
+[user guide](docs/USER_GUIDE.md) for workflows, and the
+[architecture notes](docs/ARCHITECTURE.md) for how the app fits together.
 
-## Your first five minutes
-
-1. Start the app and open the localhost URL printed in the terminal.
-2. Click **Add paper**, paste an arXiv URL, choose an agent, and start the import.
-3. Review the proposed paper, methods, cluster, and relationships. Accept the
-   proposals you want, then **Save changes**.
-4. Explore **3D universe** or **2D lineage** and click a paper to read its notes.
-5. Open **Discuss** for a cited question, or import a second paper and open
-   **Compare** for an evidence-backed comparison table.
-
-Imports and research use your CLI account and can take a minute or more. You can
-leave a view and return to the saved run. Answers depend on the available notes;
-check the cited evidence before accepting proposed changes.
-
-## Configure agents
-
-The server discovers `codex` and `claude` on `PATH`. Install and sign in to at
-least one before using AI features. For Codex:
-
-```sh
-npm install -g @openai/codex
-codex
-```
-
-Complete the CLI sign-in once, then restart LitBench. See the official
-[Codex setup guide](https://help.openai.com/en/articles/11096431) or
-[Claude Code quickstart](https://code.claude.com/docs/en/quickstart) for installation
-and account requirements. You only need one of the two agents.
-
-Override executable paths when needed:
-
-```sh
-LITBENCH_CODEX=/path/to/codex LITBENCH_DEFAULT_AGENT=codex \
-  python3 scripts/start.py
-```
-
-`LITBENCH_CLAUDE` selects a custom Claude Code executable. Restart the server
-after changing agent configuration. One agent run operates at a time. Research
-uses ephemeral CLI sessions with bounded context; LitBench owns the saved
-conversation history.
-
-## Update, back up, and troubleshoot
-
-Stop the server with `Ctrl+C`, then update the application:
-
-```sh
-git pull --ff-only
-python3 scripts/start.py --build
-```
-
-Your separate workspace remains in place. To back it up, stop the server and copy
-its entire directory, including `data/` and `papers/`. Graph export alone does
-not include conversation history.
-
-- **Port already in use:** start with `--port 8001` and open that localhost URL.
-- **Agent missing:** run `--doctor`, check CLI sign-in, and restart the server.
-- **Usage limit:** resolve it in your agent account, then retry the operation.
-- **No 3D support:** use the graph fallback or 2D lineage view.
-- **Network access:** imports need access to paper sources; AI features need your
-  provider. The local server is intended for your own computer.
-
-## Develop and verify
-
-```sh
-npm ci
-npm run verify
-npx playwright install chromium
-npm run test:e2e
-```
-
-For development, run `python3 tools/serve.py --workspace /path/to/dev-library`
-and `npm run dev` in separate terminals. Vite proxies the API to port 8000.
-Tests use synthetic fixtures and disposable workspaces. See
-[contributing](CONTRIBUTING.md), [schema](docs/SCHEMA.md), and
-[arXiv ingestion](docs/ARXIV_INGESTION.md).
-
-## Share the application
-
-```sh
-python3 scripts/package_release.py --output release/litbench-source.zip
-npm run build
-python3 scripts/package_release.py --runtime --output release/litbench-runtime.zip
-```
-
-The archives contain a fresh empty library and exclude personal workspace data
-and Git history. Start a new public repository from the source archive instead
-of publishing an existing private history. [Distribution guide](docs/OPEN_SOURCE.md).
-
-MIT licensed. See [LICENSE](LICENSE).
+Released under the [MIT license](LICENSE).

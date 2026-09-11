@@ -10,3 +10,7 @@ test-results
 playwright-report
 
 tests/fixtures/library/data/graph.js
+
+.venv/
+.litbench/
+uv.lock

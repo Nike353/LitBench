@@ -12,3 +12,6 @@ data/research-apply.json
 .server.lock
 workspaces/
 release/
+
+.venv/
+.litbench/

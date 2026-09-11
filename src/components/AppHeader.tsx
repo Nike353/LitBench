@@ -57,7 +57,7 @@ export function AppHeader() {
         </span>
         <span className="brand-name">LitBench</span>
         <span className="workspace-name">
-          {graph.meta.title.replace(/^LitBench\s*—\s*/, '')}
+          {graph.meta.title.replace(/^(?:LitBench|ScholarSync)(?:\s*[—–:-]\s*|\s*$)/i, '')}
         </span>
       </div>
 
@@ -120,6 +120,7 @@ export function AppHeader() {
         </div>
         <button
           className="button secondary add-paper-button"
+          aria-label="Add paper"
           onClick={() => setAddPaperOpen(true)}
         >
           <Plus size={16} aria-hidden="true" />
@@ -142,6 +143,7 @@ export function AppHeader() {
         </button>
         <button
           className="button primary save-button"
+          aria-label={dirty ? 'Save changes' : 'Saved'}
           onClick={() => void handleSave()}
           disabled={!dirty || loading}
         >

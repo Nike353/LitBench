@@ -31,7 +31,7 @@ python3 scripts/package_release.py --runtime --output release/litbench-runtime.z
 
 The runtime includes compiled frontend assets, Python tools, documentation, and
 prompts. Users unzip it, install Python 3.10+ and a supported agent CLI, sign in,
-and run `python3 scripts/start.py`. A browser opens the localhost application.
+and run `sh start.sh`. A browser opens the localhost application.
 The launcher prints its URL; it does not install agents or open the browser.
 To upgrade, unpack new application files and point the launcher at the existing
 personal workspace. Stop the previous server and back up that workspace first.

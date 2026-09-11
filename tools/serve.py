@@ -722,7 +722,7 @@ class Handler(SimpleHTTPRequestHandler):
 def main():
     global ROOT, GRAPH_JSON, queue_store, research_store
     parser = argparse.ArgumentParser(description="LitBench local server")
-    parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--port", type=int, help="Port to bind; defaults to an available port starting at 8000")
     parser.add_argument("--workspace", type=Path, help="Personal workspace directory; initializes an empty library when missing")
     args = parser.parse_args()
 
@@ -760,10 +760,20 @@ def main():
     except BridgeContractError as exc:
         print(f"WARNING: arXiv queue state unavailable: {exc}")
 
-    server = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
+    import errno
+    ports = [args.port] if args.port is not None else range(8000, 8021)
+    for port in ports:
+        try:
+            server = ThreadingHTTPServer(("127.0.0.1", port), Handler)
+            break
+        except OSError as exc:
+            if exc.errno != errno.EADDRINUSE:
+                raise
+    else:
+        raise SystemExit("No requested port is available. Try ./start.sh --port 8100.")
     print(
         "LitBench serving on http://127.0.0.1:%d  (Ctrl-C to stop)"
-        % args.port)
+        % server.server_address[1], flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
