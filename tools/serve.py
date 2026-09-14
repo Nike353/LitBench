@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local LitBench server with safe persistence and agent handoff."""
+"""Local Orbis server with safe persistence and agent handoff."""
 
 import argparse
 import os
@@ -721,7 +721,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 def main():
     global ROOT, GRAPH_JSON, queue_store, research_store
-    parser = argparse.ArgumentParser(description="LitBench local server")
+    parser = argparse.ArgumentParser(description="Orbis local server")
     parser.add_argument("--port", type=int, help="Port to bind; defaults to an available port starting at 8000")
     parser.add_argument("--workspace", type=Path, help="Personal workspace directory; initializes an empty library when missing")
     args = parser.parse_args()
@@ -772,7 +772,7 @@ def main():
     else:
         raise SystemExit("No requested port is available. Try ./start.sh --port 8100.")
     print(
-        "LitBench serving on http://127.0.0.1:%d  (Ctrl-C to stop)"
+        "Orbis serving on http://127.0.0.1:%d  (Ctrl-C to stop)"
         % server.server_address[1], flush=True)
     try:
         server.serve_forever()

@@ -55,9 +55,12 @@ export function AppHeader() {
         <span className="brand-mark">
           <Network size={19} aria-hidden="true" />
         </span>
-        <span className="brand-name">LitBench</span>
+        <span className="brand-name">Orbis</span>
         <span className="workspace-name">
-          {graph.meta.title.replace(/^(?:LitBench|ScholarSync)(?:\s*[—–:-]\s*|\s*$)/i, '')}
+          {graph.meta.title.replace(
+            /^(?:Orbis|LitBench|ScholarSync)(?:\s*[—–:-]\s*|\s*$)/i,
+            '',
+          )}
         </span>
       </div>
 

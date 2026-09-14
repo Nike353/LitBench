@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare and start LitBench. Normally invoked by ./start.sh through uv."""
+"""Prepare and start Orbis. Normally invoked by ./start.sh through uv."""
 import argparse
 import hashlib
 import os
@@ -55,7 +55,7 @@ def prepare_frontend(force=False):
                 target.rename(node_home)
         env = dict(os.environ)
         env["PATH"] = str(node_home / "bin") + os.pathsep + str(Path(sys.executable).parent) + os.pathsep + env.get("PATH", "")
-        print("Building LitBench. First launch may take a few minutes…", flush=True)
+        print("Building Orbis. First launch may take a few minutes…", flush=True)
         subprocess.run([str(node_home / "bin/npm"), "ci", "--no-audit", "--no-fund"], cwd=APP, env=env, check=True)
         subprocess.run([str(node_home / "bin/npm"), "run", "build"], cwd=APP, env=env, check=True)
         stamp.write_text(digest)
@@ -69,7 +69,7 @@ def main():
     parser.add_argument("--doctor", action="store_true", help="Show setup information without starting")
     parser.add_argument("--prepare-only", action="store_true", help="Set up dependencies and frontend without starting")
     args = parser.parse_args()
-    print(f"LitBench · Python {sys.version.split()[0]}", flush=True)
+    print(f"Orbis · Python {sys.version.split()[0]}", flush=True)
     print(f"Library: {args.workspace.expanduser().resolve()}", flush=True)
     if args.doctor:
         import shutil
@@ -82,7 +82,7 @@ def main():
     except subprocess.CalledProcessError as error:
         raise SystemExit(f"Setup could not finish (exit {error.returncode}). Check your connection and retry ./start.sh.") from error
     if args.prepare_only:
-        print("LitBench is ready.")
+        print("Orbis is ready.")
         return
     command = [sys.executable, "-u", str(APP / "tools/serve.py"), "--workspace", str(args.workspace)]
     if args.port is not None:

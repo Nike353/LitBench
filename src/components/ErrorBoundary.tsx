@@ -12,7 +12,7 @@ export class ErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error('LitBench rendering error', error, info);
+    console.error('Orbis rendering error', error, info);
   }
 
   render() {
@@ -20,7 +20,7 @@ export class ErrorBoundary extends Component<
     return (
       <main className="fatal-state">
         <AlertTriangle aria-hidden="true" />
-        <h1>LitBench could not render</h1>
+        <h1>Orbis could not render</h1>
         <p>{this.state.error.message}</p>
         <button className="button primary" onClick={() => window.location.reload()}>
           <RotateCcw size={16} aria-hidden="true" />

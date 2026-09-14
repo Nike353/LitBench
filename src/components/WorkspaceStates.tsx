@@ -7,7 +7,7 @@ export function LoadingState() {
         <Network aria-hidden="true" />
       </div>
       <div>
-        <strong>LitBench</strong>
+        <strong>Orbis</strong>
         <span>Loading research graph</span>
       </div>
       <div className="loading-track">

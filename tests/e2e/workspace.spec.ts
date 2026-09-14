@@ -34,7 +34,7 @@ const canonicalPaperEdgeCount = canonicalGraph.edges.filter(
 
 async function waitForWorkspace(page: Page) {
   await page.goto('/');
-  await expect(page.getByText('LitBench', { exact: true })).toBeVisible();
+  await expect(page.getByText('Orbis', { exact: true })).toBeVisible();
   await expect(page.getByTestId('graph-stage')).toBeVisible();
 }
 
@@ -66,7 +66,7 @@ async function verifyCanvasPixels(page: Page, name: string) {
   expect(colors.size).toBeGreaterThan(12);
 }
 
-test.describe('LitBench product workspace', () => {
+test.describe('Orbis product workspace', () => {
   test('renders a nonblank interactive 3D graph and core desktop workflows', async ({
     page,
   }, testInfo) => {

@@ -1,12 +1,12 @@
-# LitBench
+# Orbis
 
 **Read papers. Connect ideas. Build your own research map.**
 
-LitBench turns a paper library into an interactive workspace. See how papers
+Orbis turns a paper library into an interactive workspace. See how papers
 relate, keep the ideas you want to remember, and ask questions grounded in your
 notes—all from a browser on your own computer.
 
-![Papers grouped into connected research fields in LitBench's 3D universe](docs/images/universe.png)
+![Papers grouped into connected research fields in Orbis's 3D universe](docs/images/universe.png)
 
 ## Get started
 
@@ -19,18 +19,18 @@ sh start.sh
 
 That's the setup command and the launch command. It installs uv if needed, lets
 uv manage Python and its dependencies, sets up the frontend build tools, and
-starts LitBench. You do not need to install Python, Node.js, or npm yourself.
+starts Orbis. You do not need to install Python, Node.js, or npm yourself.
 First launch needs internet access and may take a few minutes; later launches
 reuse the installed tools and built app. Supported on **macOS and Linux**.
 
 When it's ready, the terminal prints something like:
 
 ```text
-LitBench serving on http://127.0.0.1:8000  (Ctrl-C to stop)
+Orbis serving on http://127.0.0.1:8000  (Ctrl-C to stop)
 ```
 
 **Open the address printed in your terminal.** It works on your computer while
-LitBench is running; it is not a hosted demo website. If port 8000 is busy, the
+Orbis is running; it is not a hosted demo website. If port 8000 is busy, the
 launcher chooses another available port. Keep the terminal open while using the
 app, and press `Ctrl+C` when you're done.
 
@@ -51,13 +51,13 @@ again. Changed frontend source is rebuilt automatically.
 ### Add your first paper
 
 Your library starts empty. Click **Add paper**, paste an arXiv URL, and choose
-an agent. LitBench reads the paper and proposes a place for it in your graph,
+an agent. Orbis reads the paper and proposes a place for it in your graph,
 along with methods and relationships. Review the proposals, accept what belongs,
 and **Save changes**.
 
 For importing papers and asking AI questions, install and sign in to **one** of
 [Codex](https://developers.openai.com/codex/quickstart) or
-[Claude Code](https://code.claude.com/docs/en/quickstart), then restart LitBench.
+[Claude Code](https://code.claude.com/docs/en/quickstart), then restart Orbis.
 These features use that account's provider and usage limits. Browsing and manual
 editing work without an agent.
 
@@ -99,7 +99,9 @@ starts empty, and no personal research library is included in this repository._
 
 ## Where your work lives
 
-The application and your library are stored separately. By default, your papers,
+Orbis was previously called LitBench; the repository URL and existing library
+folder names retain that name for compatibility. The application and your library
+are stored separately. By default, your papers,
 notes, graph, and conversations live in:
 
 - **macOS:** `~/Library/Application Support/LitBench/default`
@@ -111,7 +113,7 @@ To use a different library:
 sh start.sh --workspace /path/to/my-library
 ```
 
-To back up your work, stop LitBench and copy that entire library folder.
+To back up your work, stop Orbis and copy that entire library folder.
 Application updates do not replace it. AI features send selected paper context
 to your configured provider; see [data handling](SECURITY.md) for details.
 
@@ -128,7 +130,7 @@ to your configured provider; see [data handling](SECURITY.md) for details.
 
 ## Contribute
 
-LitBench uses React and TypeScript for the interface and Python for its local
+Orbis uses React and TypeScript for the interface and Python for its local
 server. Python setup is locked with uv; frontend dependencies are locked with npm.
 The launcher installs a private Node runtime using the uv-managed `nodeenv` tool.
 
