@@ -16,6 +16,8 @@ from tools.agent_bridge import (
     build_prompt,
     build_revalidation_prompt,
     comparable_title,
+    canonical_paper_url,
+    graph_duplicate,
     load_batch,
     validate_full_text_source,
 )
@@ -24,6 +26,45 @@ from tools.agent_bridge import (
 ROOT = Path(__file__).resolve().parent.parent
 FIXTURE = ROOT / "tests/fixtures/library"
 BATCH = FIXTURE / "data" / "imports" / "humanoid-loco-manipulation-2026.json"
+
+
+class PaperUrlTests(unittest.TestCase):
+
+    def test_arxiv_forms_share_versionless_identity(self):
+        for host in ("arxiv.org", "www.arxiv.org"):
+            for scheme in ("http", "https"):
+                for path in ("abs/2609.07002", "pdf/2609.07002v1",
+                             "pdf/2609.07002v1.pdf", "html/2609.07002",
+                             "abs/2609.07002v2/?download=1#section"):
+                    url = f"{scheme}://{host}/{path}"
+                    with self.subTest(url=url):
+                        self.assertEqual(canonical_paper_url(url),
+                                         "https://arxiv.org/abs/2609.07002")
+        self.assertEqual(canonical_paper_url(
+            "https://arxiv.org/pdf/hep-th/9901001v2.pdf"),
+            "https://arxiv.org/abs/hep-th/9901001")
+
+    def test_other_hosts_and_nonpaper_paths_are_preserved(self):
+        for url in ("https://example.org/pdf/2609.07002v1.pdf",
+                    "https://arxiv.org.evil.example/pdf/2609.07002v1",
+                    "https://arxiv.org/list/cs.AI/recent",
+                    "https://arxiv.org/abs/not-a-paper"):
+            with self.subTest(url=url):
+                self.assertEqual(canonical_paper_url(url), url)
+
+    def test_attestation_still_requires_the_observed_full_text_url(self):
+        record = {"arxiv_id": "2609.07002",
+                  "canonical_url": "https://arxiv.org/abs/2609.07002"}
+        source = {"url": "https://arxiv.org/pdf/2609.07002v1",
+                  "format": "arxiv-pdf",
+                  "evidence": "Methods, experiments, and limitations sections."}
+        self.assertEqual(validate_full_text_source(
+            record, source, [source["url"]]), [])
+        for observed in (record["canonical_url"],
+                         "https://arxiv.org/html/2609.07002"):
+            with self.subTest(observed=observed):
+                self.assertIn("not observed", "; ".join(
+                    validate_full_text_source(record, source, [observed])))
 
 
 class IsolatedInsertionTests(unittest.TestCase):
@@ -126,6 +167,39 @@ class IsolatedInsertionTests(unittest.TestCase):
         self.assertEqual(applied, graph)
         self.assertTrue(
             (self.root / "papers" / "test2026-isolated.md").exists())
+
+    def test_insertion_accepts_equivalent_urls_but_rejects_other_papers(self):
+        with IsolatedInsertion(self.root) as insertion:
+            graph, paper_id = self.write_valid_output(insertion)
+            node = next(n for n in graph["nodes"] if n["id"] == paper_id)
+            node["paper"]["url"] = "https://arxiv.org/abs/2609.07002"
+            atomic_write_graph(insertion.workspace, graph)
+            for url in (
+                "https://arxiv.org/pdf/2609.07002v1",
+                "https://www.arxiv.org/pdf/2609.07002v1.pdf",
+                "http://arxiv.org/html/2609.07002",
+            ):
+                with self.subTest(url=url):
+                    self.assertEqual(insertion.verify_inserted(
+                        {"canonical_url": url}, paper_id), [])
+            self.assertIn("new paper URL does not match the queue record",
+                          insertion.verify_inserted(
+                              {"canonical_url": "https://arxiv.org/abs/2609.07003"},
+                              paper_id))
+
+    def test_duplicate_detection_matches_urls_without_arxiv_metadata(self):
+        with IsolatedInsertion(self.root) as insertion:
+            graph, paper_id = self.write_valid_output(insertion)
+            node = next(n for n in graph["nodes"] if n["id"] == paper_id)
+            node["paper"].pop("arxiv")
+            node["paper"]["url"] = "https://www.arxiv.org/pdf/2609.07002v1.pdf"
+            atomic_write_graph(insertion.workspace, graph)
+            self.assertEqual(graph_duplicate(insertion.workspace, {
+                "canonical_url": "https://arxiv.org/abs/2609.07002",
+            }), paper_id)
+            self.assertIsNone(graph_duplicate(insertion.workspace, {
+                "canonical_url": "https://arxiv.org/abs/2609.07003",
+            }))
 
     def test_empty_library_can_receive_its_first_paper_and_cluster(self):
         with IsolatedInsertion(self.root) as reference:

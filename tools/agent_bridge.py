@@ -449,17 +449,35 @@ class QueueStateStore:
         }
 
 
+def canonical_paper_url(url):
+    """Normalize arXiv paper identity, never full-text fetch attestation.
+
+    Other hosts and unrecognized paths are preserved verbatim.
+    """
+    parsed = urlparse(url)
+    if (parsed.scheme in ("http", "https")
+            and parsed.netloc.lower() in ("arxiv.org", "www.arxiv.org")):
+        match = re.fullmatch(
+            r"/(?:abs|pdf|html)/(\d{4}\.\d{4,5}|[a-zA-Z-]+(?:\.[A-Z]{2})?/\d{7})"
+            r"(?:v\d+)?(?:\.pdf)?/?",
+            parsed.path,
+        )
+        if match:
+            return f"https://arxiv.org/abs/{match.group(1)}"
+    return url
+
+
 def graph_duplicate(root, record):
     graph = json.loads(
         (root / "data" / "graph.json").read_text(encoding="utf-8"))
     arxiv_id = record.get("arxiv_id")
-    canonical = record["canonical_url"].replace("http:", "https:", 1)
+    canonical = canonical_paper_url(record["canonical_url"]).replace("http:", "https:", 1)
     for node in graph.get("nodes", []):
         if node.get("type") != "paper":
             continue
         paper = node.get("paper") or {}
         metadata = paper.get("arxiv") or {}
-        url = str(paper.get("url", "")).replace("http:", "https:", 1)
+        url = canonical_paper_url(str(paper.get("url", ""))).replace("http:", "https:", 1)
         if (arxiv_id
                 and metadata.get("id", "").split("v", 1)[0] == arxiv_id):
             return node["id"]
@@ -789,8 +807,8 @@ class IsolatedInsertion:
             errors.append(
                 "structured graph_node_id does not match the new paper node")
         paper = paper_node.get("paper") or {}
-        if paper.get("url", "").rstrip("/") != (
-                record["canonical_url"].rstrip("/")):
+        if canonical_paper_url(paper.get("url", "")).rstrip("/") != (
+                canonical_paper_url(record["canonical_url"]).rstrip("/")):
             errors.append("new paper URL does not match the queue record")
         if ("title" in record
                 and comparable_title(paper.get("title"))

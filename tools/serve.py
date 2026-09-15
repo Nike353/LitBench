@@ -28,6 +28,7 @@ try:
         atomic_write_graph as write_graph_files,
         build_agent_command,
         build_prompt,
+        canonical_paper_url,
         default_agent_id,
         graph_duplicate,
         load_batch,
@@ -47,6 +48,7 @@ except ModuleNotFoundError:  # Imported as tools.serve by tests.
         atomic_write_graph as write_graph_files,
         build_agent_command,
         build_prompt,
+        canonical_paper_url,
         default_agent_id,
         graph_duplicate,
         load_batch,
@@ -143,6 +145,7 @@ def queue_finish(arxiv_id, status, result=None, reason=None,
 
 
 def manual_record(url):
+    url = canonical_paper_url(url)
     parsed = urlparse(url)
     match = re.fullmatch(
         r"/(?:abs|html|pdf)/(\d{4}\.\d{4,5})(?:v\d+)?(?:\.pdf)?",
@@ -153,7 +156,7 @@ def manual_record(url):
         "query_id": "manual",
         "retrieval_match": {"query_ids": ["manual"], "matched_terms": []},
     }
-    if match:
+    if match and parsed.netloc == "arxiv.org":
         record["arxiv_id"] = match.group(1)
     return record
 
@@ -443,7 +446,8 @@ class Handler(SimpleHTTPRequestHandler):
                 record = record_for(batch, batch_id, arxiv_id)
                 relevance_policy = batch.get("relevance_policy")
                 supplied_url = sanitize_line(body.get("url", ""))
-                if supplied_url and supplied_url != record["canonical_url"]:
+                if supplied_url and canonical_paper_url(supplied_url) != (
+                        canonical_paper_url(record["canonical_url"])):
                     raise BridgeContractError(
                         "paper URL does not match the verified batch")
             else:

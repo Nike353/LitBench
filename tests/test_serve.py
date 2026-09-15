@@ -2,9 +2,10 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import Mock, patch
 
 from tools.agent_bridge import atomic_write_graph, stream_agent_events
-from tools.serve import manual_record, sanitize_line
+from tools.serve import Handler, manual_record, sanitize_line
 
 
 class FakeProcess:
@@ -93,6 +94,53 @@ class ServerHelpersTests(unittest.TestCase):
         record = manual_record("https://arxiv.org/pdf/2201.08434v2.pdf")
 
         self.assertEqual(record["arxiv_id"], "2201.08434")
+
+    def test_manual_record_canonicalizes_arxiv_urls(self):
+        for url in ("https://arxiv.org/pdf/2609.07002v1",
+                    "https://www.arxiv.org/pdf/2609.07002v1.pdf",
+                    "http://www.arxiv.org/html/2609.07002"):
+            with self.subTest(url=url):
+                record = manual_record(url)
+                self.assertEqual(record["canonical_url"],
+                                 "https://arxiv.org/abs/2609.07002")
+                self.assertEqual(record["arxiv_id"], "2609.07002")
+        self.assertNotIn("arxiv_id", manual_record(
+            "https://example.org/pdf/2609.07002v1"))
+
+    def test_verified_batch_url_comparison_uses_paper_identity(self):
+        record = {"arxiv_id": "2609.07002",
+                  "canonical_url": "https://arxiv.org/abs/2609.07002"}
+        for url, accepted in (
+            ("https://www.arxiv.org/pdf/2609.07002v1.pdf", True),
+            ("https://arxiv.org/html/2609.07002", True),
+            ("https://arxiv.org/abs/2609.07003", False),
+        ):
+            with self.subTest(url=url):
+                handler = object.__new__(Handler)
+                handler.path = "/api/insert"
+                handler.same_origin_ok = Mock(return_value=True)
+                handler.read_json_body = Mock(return_value={
+                    "agent": "codex", "batch_id": "fixture",
+                    "arxiv_id": "2609.07002", "url": url})
+                handler.send_json = Mock()
+                handler.run_insert = Mock()
+                with patch("tools.serve.research_store") as research, \
+                        patch("tools.serve.agent_catalog", return_value=[{"id": "codex"}]), \
+                        patch("tools.serve.resolve_agent", return_value={"label": "Codex"}), \
+                        patch("tools.serve.load_batch", return_value={}), \
+                        patch("tools.serve.record_for", return_value=record), \
+                        patch("tools.serve.queue_store") as queue:
+                    research.journal.exists.return_value = False
+                    handler.do_POST()
+                    if accepted:
+                        handler.run_insert.assert_called_once()
+                        handler.send_json.assert_not_called()
+                        queue.start.assert_called_once_with("2609.07002")
+                    else:
+                        handler.run_insert.assert_not_called()
+                        handler.send_json.assert_called_once_with(400, {
+                            "error": "paper URL does not match the verified batch"})
+                        queue.start.assert_not_called()
 
     def test_stream_parser_captures_canonical_arxiv_curl_fetch(self):
         process = FakeProcess([
